@@ -299,17 +299,17 @@ body:not(.dark-mode) .delete-btn:hover { background-color: #fee2e2; }
     cursor: pointer;
 }
 
-/* Responsividad */
+/* Responsividad para móviles */
 @media (max-width: 768px) {
     .tasks-main-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Cambia a una sola columna en pantallas pequeñas */
     }
     .app-header {
-        flex-direction: column;
+        flex-direction: column; /* Apila los elementos del encabezado en pantallas pequeñas */
         align-items: flex-start;
         gap: 1rem;
     }
     .header-controls {
-        width: 100%;
+        width: 100%; /* Los controles ocupan todo el ancho */
     }
 }

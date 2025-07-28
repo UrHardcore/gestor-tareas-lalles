@@ -1,4 +1,23 @@
 {
+    name Gestor de Tareas Luis Alles,
+    short_name TaskFlow,
+    description Un gestor de tareas personal para Luis Alles,
+    start_url .index.html,
+    display standalone,
+    background_color #f9fafb,
+    theme_color #3b82f6,
+    icons [
+      {
+        src iconsicon-192x192.png,
+        sizes 192x192,
+        type imagepng
+      },
+      {
+        src iconsicon-512x512.png,
+        sizes 512x512,
+        type imagepng
+      },
+      {{
     "name": "Gestor de Tareas Luis Alles",
     "short_name": "TaskFlow",
     "description": "Un gestor de tareas personal para Luis Alles",
