@@ -8,12 +8,12 @@ import { getFirestore, connectFirestoreEmulator } from 'https://www.gstatic.com/
  * Get these from: Firebase Console > Project Settings > General > Your apps
  */
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.firebasestorage.app",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyA3F9-kE_PzkaglhwtADLDE3ba8KsOyTOk",
+  authDomain: "gestion-tecnica-profesional.firebaseapp.com",
+  projectId: "gestion-tecnica-profesional",
+  storageBucket: "gestion-tecnica-profesional.firebasestorage.app",
+  messagingSenderId: "560940669562",
+  appId: "1:560940669562:web:1e21556712a9b3851379c3"
 };
 
 const app = initializeApp(firebaseConfig);
