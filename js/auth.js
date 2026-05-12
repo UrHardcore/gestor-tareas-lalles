@@ -105,6 +105,7 @@ onAuthStateChanged(auth, async (user) => {
       } else {
         loader.classList.add('fade-out');
         setTimeout(() => { loader.style.display = 'none'; }, 300);
+        setLoading(false);
         loginPage.style.display = 'none';
         onboardingModal.classList.add('active');
       }
@@ -112,6 +113,8 @@ onAuthStateChanged(auth, async (user) => {
       console.error('Error checking user:', err);
       loader.classList.add('fade-out');
       setTimeout(() => { loader.style.display = 'none'; }, 300);
+      setLoading(false);
+      showError('Error de conexión con la base de datos. Verificá tu configuración.');
       loginPage.style.display = 'flex';
     }
   } else {
