@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6366f1">
+  <title>TicketFlow - Panel</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%236366f1'/><text x='50' y='68' font-size='50' text-anchor='middle' fill='white' font-weight='bold'>TF</text></svg>">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Loader -->
+  <div class="loader-overlay" id="loader">
+    <div style="text-align:center">
+      <div class="spinner" style="margin:0 auto 16px"></div>
+      <p style="color:var(--text-secondary);font-size:.875rem">Cargando TicketFlow...</p>
+    </div>
+  </div>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 3v2"/><path d="M13 9v2"/><path d="M13 15v2"/><path d="M3 3h12a2 2 0 012 2v2a2 2 0 000 4v2a2 2 0 01-2 2H3a2 2 0 01-2-2v-2a2 2 0 000-4V5a2 2 0 012-2z"/></svg>
+        </div>
+        <span>TicketFlow</span>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" data-tooltip="Colapsar">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3h12"/><path d="M3 9h12"/><path d="M3 15h12"/></svg>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Principal</div>
+        <div class="sidebar-link active" data-view="dashboard" onclick="window.app.navigate('dashboard')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg>
+          <span class="link-text">Dashboard</span>
+        </div>
+        <div class="sidebar-link" data-view="tickets" onclick="window.app.navigate('tickets')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 5v2"/><path d="M15 11v2"/><path d="M15 17v2"/><path d="M5 5h14a2 2 0 012 2v3a2 2 0 000 4v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3a2 2 0 000-4V7a2 2 0 012-2z"/></svg>
+          <span class="link-text">Tickets</span>
+          <span class="link-badge" id="ticketCount">0</span>
+        </div>
+        <div class="sidebar-link" data-view="customers" onclick="window.app.navigate('customers')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="link-text">Clientes</span>
+        </div>
+        <div class="sidebar-link" data-view="completed" onclick="window.app.navigate('completed')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          <span class="link-text">Finalizados</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section admin-only" id="adminSection" style="display:none">
+        <div class="sidebar-section-title">Administración</div>
+        <div class="sidebar-link" data-view="admin-users" onclick="window.app.navigate('admin-users')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <span class="link-text">Usuarios</span>
+        </div>
+        <div class="sidebar-link" data-view="admin-import" onclick="window.app.navigate('admin-import')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span class="link-text">Importar Base</span>
+        </div>
+        <div class="sidebar-link" data-view="admin-logs" onclick="window.app.navigate('admin-logs')">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          <span class="link-text">Auditoría</span>
+        </div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user" id="sidebarUser" onclick="window.app.toggleUserMenu()">
+        <div class="avatar" id="userAvatar"></div>
+        <div class="sidebar-user-info">
+          <div class="sidebar-user-name" id="userName">-</div>
+          <div class="sidebar-user-role" id="userRole">-</div>
+        </div>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="4 6 8 10 12 6"/></svg>
+      </div>
+      <div class="dropdown-menu" id="userMenu">
+        <button class="dropdown-item" onclick="window.app.navigate('settings')">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="8" r="3"/><path d="M13.7 10.4a1 1 0 00.2 1.1l.03.03a1.2 1.2 0 01-1.7 1.7l-.03-.03a1 1 0 00-1.1-.2 1 1 0 00-.6.9v.1a1.2 1.2 0 01-2.4 0v-.05a1 1 0 00-.65-.9 1 1 0 00-1.1.2l-.03.03a1.2 1.2 0 01-1.7-1.7l.03-.03a1 1 0 00.2-1.1 1 1 0 00-.9-.6h-.1a1.2 1.2 0 010-2.4h.05a1 1 0 00.9-.65 1 1 0 00-.2-1.1l-.03-.03a1.2 1.2 0 011.7-1.7l.03.03a1 1 0 001.1.2h.05a1 1 0 00.6-.9v-.1a1.2 1.2 0 012.4 0v.05a1 1 0 00.65.9 1 1 0 001.1-.2l.03-.03a1.2 1.2 0 011.7 1.7l-.03.03a1 1 0 00-.2 1.1v.05a1 1 0 00.9.6h.1a1.2 1.2 0 010 2.4h-.05a1 1 0 00-.9.65z"/></svg>
+          Configuración
+        </button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item danger" onclick="window.logout()">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2H3a1 1 0 00-1 1v10a1 1 0 001 1h3"/><polyline points="10 11 14 7 10 3"/><line x1="14" y1="7" x2="6" y2="7"/></svg>
+          Cerrar Sesión
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="main-header">
+      <div class="header-left">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 4h14"/><path d="M3 10h14"/><path d="M3 16h14"/></svg>
+        </button>
+        <h2 class="header-title" id="headerTitle">Dashboard</h2>
+      </div>
+      <div class="header-right">
+        <div class="header-search">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><line x1="16" y1="16" x2="11" y2="11"/></svg>
+          <input type="text" placeholder="Buscar tickets, clientes..." id="globalSearch">
+        </div>
+        <button class="theme-toggle" id="themeToggle" data-tooltip="Cambiar tema">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" id="themeIcon"><circle cx="9" cy="9" r="5"/><line x1="9" y1="1" x2="9" y2="3"/><line x1="9" y1="15" x2="9" y2="17"/><line x1="2.34" y1="3.34" x2="3.76" y2="4.76"/><line x1="14.24" y1="13.24" x2="15.66" y2="14.66"/><line x1="1" y1="9" x2="3" y2="9"/><line x1="15" y1="9" x2="17" y2="9"/><line x1="2.34" y1="14.66" x2="3.76" y2="13.24"/><line x1="14.24" y1="4.76" x2="15.66" y2="3.34"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="page-content" id="pageContent">
+      <!-- Views rendered here by JS -->
+    </div>
+  </main>
+
+  <!-- Create/Edit Ticket Modal -->
+  <div class="modal-overlay" id="ticketModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="ticketModalTitle">Nuevo Ticket</h3>
+        <button class="modal-close" onclick="window.app.closeModal('ticketModal')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="14" y2="14"/><line x1="14" y1="4" x2="4" y2="14"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="ticketForm">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="form-group" style="grid-column:1/-1">
+              <label class="form-label">Cliente / N° Cliente</label>
+              <input type="text" class="form-input" id="tf_customerSearch" placeholder="Buscar por nombre, razón social o número..." autocomplete="off">
+              <div id="customerSuggestions" style="display:none;position:absolute;z-index:10;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);max-height:200px;overflow-y:auto;width:100%;margin-top:4px"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nombre del cliente</label>
+              <input type="text" class="form-input" id="tf_customerName" placeholder="Nombre">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Razón Social</label>
+              <input type="text" class="form-input" id="tf_businessName" placeholder="Razón social">
+            </div>
+            <div class="form-group">
+              <label class="form-label">N° Cliente</label>
+              <input type="text" class="form-input" id="tf_customerNumber" placeholder="Número de cliente">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teléfono</label>
+              <input type="text" class="form-input" id="tf_phone" placeholder="Teléfono">
+            </div>
+            <div class="form-group" style="grid-column:1/-1">
+              <label class="form-label">Dirección</label>
+              <input type="text" class="form-input" id="tf_address" placeholder="Dirección completa">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Prioridad</label>
+              <select class="form-select" id="tf_priority">
+                <option value="low">Baja</option>
+                <option value="medium" selected>Media</option>
+                <option value="high">Alta</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Asignar a</label>
+              <select class="form-select" id="tf_assignedTo">
+                <option value="">Sin asignar</option>
+              </select>
+            </div>
+            <div class="form-group" style="grid-column:1/-1">
+              <label class="form-label">Descripción *</label>
+              <textarea class="form-textarea" id="tf_description" placeholder="Describe el problema o tarea..." rows="3" required></textarea>
+            </div>
+          </div>
+          <input type="hidden" id="tf_ticketId">
+          <input type="hidden" id="tf_customerId">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.app.closeModal('ticketModal')">Cancelar</button>
+        <button class="btn btn-primary" id="ticketFormSubmit" onclick="window.app.saveTicket()">Crear Ticket</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customer Info Modal -->
+  <div class="modal-overlay" id="customerInfoModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title">Información del Cliente</h3>
+        <button class="modal-close" onclick="window.app.closeModal('customerInfoModal')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="14" y2="14"/><line x1="14" y1="4" x2="4" y2="14"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="customerInfoContent"></div>
+    </div>
+  </div>
+
+  <!-- Import Modal -->
+  <div class="modal-overlay" id="importModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title">Importar Base de Datos</h3>
+        <button class="modal-close" onclick="window.app.closeModal('importModal')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="14" y2="14"/><line x1="14" y1="4" x2="4" y2="14"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="import-dropzone" id="importDropzone">
+          <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M24 32V16"/><polyline points="16 24 24 16 32 24"/><path d="M40 32v6a4 4 0 01-4 4H12a4 4 0 01-4-4v-6"/></svg>
+          <h3>Arrastrá tu archivo aquí</h3>
+          <p>o hacé click para seleccionar. Formatos: .xlsx, .csv</p>
+          <input type="file" id="importFileInput" accept=".xlsx,.csv,.xls" style="display:none">
+        </div>
+        <div id="importPreview" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin:16px 0 12px">
+            <h4 id="importPreviewTitle" style="font-weight:600"></h4>
+            <button class="btn btn-sm btn-secondary" onclick="window.app.resetImport()">Cambiar archivo</button>
+          </div>
+          <div class="import-preview">
+            <div class="table-container" id="importTable"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.app.closeModal('importModal')">Cancelar</button>
+        <button class="btn btn-primary" id="importSubmitBtn" onclick="window.app.confirmImport()" style="display:none">
+          Importar Datos
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ticket Detail Modal -->
+  <div class="modal-overlay" id="ticketDetailModal">
+    <div class="modal modal-xl" style="max-height:92vh">
+      <div class="modal-header">
+        <div class="flex items-center gap-sm">
+          <h3 class="modal-title" id="detailTicketId"></h3>
+          <span id="detailTicketStatus" class="badge"></span>
+        </div>
+        <button class="modal-close" onclick="window.app.closeModal('ticketDetailModal')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="14" y2="14"/><line x1="14" y1="4" x2="4" y2="14"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="ticketDetailContent" style="padding:0">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div class="modal-overlay" id="confirmModal">
+    <div class="modal" style="max-width:400px">
+      <div class="modal-header">
+        <h3 class="modal-title" id="confirmTitle">Confirmar</h3>
+        <button class="modal-close" onclick="window.app.closeModal('confirmModal')">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="14" y2="14"/><line x1="14" y1="4" x2="4" y2="14"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage" style="color:var(--text-secondary)"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="window.app.closeModal('confirmModal')">Cancelar</button>
+        <button class="btn btn-danger" id="confirmAction">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
