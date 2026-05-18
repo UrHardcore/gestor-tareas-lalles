@@ -234,11 +234,15 @@ export async function addComment(ticketId, text) {
 export function subscribeComments(ticketId, callback) {
   const q = query(
     collection(db, Collections.COMMENTS),
-    where('ticketId', '==', ticketId),
-    orderBy('createdAt', 'asc')
+    where('ticketId', '==', ticketId)
   );
   return onSnapshot(q, (snap) => {
     const comments = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    comments.sort((a, b) => {
+      const ta = a.createdAt?.toMillis?.() || 0;
+      const tb = b.createdAt?.toMillis?.() || 0;
+      return ta - tb;
+    });
     callback(comments);
   });
 }
@@ -254,11 +258,15 @@ export async function addLog(data) {
 export function subscribeLogs(ticketId, callback) {
   const q = query(
     collection(db, Collections.LOGS),
-    where('ticketId', '==', ticketId),
-    orderBy('createdAt', 'desc')
+    where('ticketId', '==', ticketId)
   );
   return onSnapshot(q, (snap) => {
     const logs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    logs.sort((a, b) => {
+      const ta = a.createdAt?.toMillis?.() || 0;
+      const tb = b.createdAt?.toMillis?.() || 0;
+      return tb - ta;
+    });
     callback(logs);
   });
 }
